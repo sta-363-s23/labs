@@ -48,6 +48,9 @@ For this assignment, go to RStudio Pro and click:
 https://github.com/sta-363-s23/lab-01-hello-r.git
 ```
 
+# Instructions
+
+Be sure to include the relevant R code as well as full sentences answering each of the questions (i.e. if I ask for the average, you can output the answer in R but **also** write a full sentence with the answer).
 
 # Packages
 
