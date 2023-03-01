@@ -77,12 +77,17 @@ music <- read_csv("music.csv")
 
 4.  Fit a ridge regression model on the training set with $\lambda$ chosen using 10-fold cross validation. Report the $\lambda$ chosen and explain why. Report the estimated test root mean square error from the cross validation **and** the test root mean squared error obtained using testing portion of the initially split data frame.
 
+4. Using the model chosen above on the training data, which variables were included in the final model?
+
 5. Fit a lasso model on the training set with $\lambda$ chosen using cross validation. Report the $\lambda$ chosen and explain why. Report the estimated test root mean square error from the cross validation **and** the test root mean squared error obtained using testing portion of the initially split data frame.
 
+6. Using the model chosen above on the training data, which variables were included in the final model?
 
-6. Fit an elastic net model on the training set with $\lambda$ and $\alpha$ chosen using cross validation. Create a Figure with the estimated test root mean squared error on the y-axis and $\lambda$ on the x-axis with lines colored by the mixture chosen. 
+
+7. Fit an elastic net model on the training set with $\lambda$ and $\alpha$ chosen using cross validation. Create a Figure with the estimated test root mean squared error on the y-axis and $\lambda$ on the x-axis with lines colored by the mixture chosen. 
 
 7. Report the $\lambda$ that you would choose from the previous exercise and explain why. Report the estimated test root mean square error from the cross validation **and** the test root mean squared error obtained using testing portion of the initially split data frame.
 
+6. Using the model chosen above on the training data, which variables were included in the final model?
 
 8. Comment on the results obtained. How well can we predict the latitude of where the music originated? Is there much difference among the test errors resulting from these four approaches?
