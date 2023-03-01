@@ -68,7 +68,7 @@ This data frame should be loaded in your RStudio Project when you load your star
 
 
 ```{r split, eval = FALSE}
-music <- read_csv("music.csv")
+music <- read_csv("data/music.csv")
 ```
 
 2. We are interested in predicting the latitude (`lat`) of the music's origin from all other variables. Using the training data only, examine a visualization of the outcome.
