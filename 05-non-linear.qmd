@@ -1,0 +1,136 @@
+---
+title: "Lab 05 - Nonlinear models"
+format: 
+  html:
+    self-contained: true
+    theme:
+      - flatly
+      - lab.scss
+---
+
+
+```{r include=FALSE}
+library(tidyverse)
+library(tidymodels)
+library(ISLR)
+options(
+  htmltools.dir.version = FALSE, # for blogdown
+  show.signif.stars = FALSE     # for regression output
+)
+```
+
+**Due:** Tuesday 2022-04-04
+
+# Getting started
+
+-   Find the lab instructions under the course syllabus on our website [bit.ly/sta-363-s23](bit.ly/sta-363-s23)\
+-   Go to our RStudio Pro workspace and create a new project using my template.
+
+For this assignment, go to RStudio Pro and click:
+
+**Step 1**. File \> New Project\
+**Step 2**. "Version Control"\
+**Step 3**. Git\
+**Step 4**. Copy the following into the "Repository URL":
+
+```{bash}
+#| eval: false
+https://github.com/sta-363-s23/lab-05-non-linear.git
+```
+
+
+
+**Remember to write out your answers in full sentences, do not just rely on the R output**
+
+# Packages
+
+In this lab we will work with four packages: `tidyverse` which is a collection of packages for doing data analysis in a "tidy" way,  `tidymodels` for statistical modeling, `DALEXtra` to help us explain how the parameters are impacting the final predictions, and `visdat` to help us visualize the dataset.
+
+If you'd like to run your code in the Console as well you'll also need to load the packages there. To do so, run the following in the console. 
+
+```{r eval = FALSE}
+library(tidyverse) 
+library(tidymodels)
+library(DALEXtra)
+library(visdat)
+```
+
+# Data
+
+For this lab, we are using `wage` data adapted from the `ISLR` package. This can be loaded in by running:
+
+```{r}
+#| eval: false
+load("data/wage.rda")
+```
+
+Below is a data dictionary for this dataset:
+
+variable | definition
+---------|-----------
+year | Year that wage information was recorded
+age | Age of worker
+maritl | A factor with levels 1. Never Married 2. Married 3. Widowed 4. Divorced and 5. Separated indicating marital status
+race | A factor with levels 1. White 2. Black 3. Asian and 4. Other indicating race
+education | A factor with levels 1. < HS Grad 2. HS Grad 3. Some College 4. College Grad and 5. Advanced Degree indicating education level
+region | Region of the country (mid-atlantic only)
+jobclass | A factor with levels 1. Industrial and 2. Information indicating type of job
+health | A factor with levels 1. <=Good and 2. >=Very Good indicating health level of worker
+health_ins | A factor with levels 1. Yes and 2. No indicating whether worker has health insurance
+logwage | Log of workers wage
+wage | Workers raw wage
+
+# Exercises
+
+1. Using the `visdat` package examine the `wage` dataset. What are the variables? How many observations are there? Is there any missing data? If so how much? 
+
+2. For this lab, we are interested in predicting the variable `wage` from `age`, `health_ins`, `jobclass`, `education`, and `race`. Let's first look at the distribution of our outcome. Create a publication-ready figure examining the distribution of `wage`.
+
+3. Create a recipe using the `wage` data. Recall we are interested in predicting `wage` from `age`, `health_ins`, `jobclass`, `education`, and `race`. Add a step to your recipe that accounts for the missing data, if there is any. Explain what this step is doing and why you chose this method. (_In this exercise, you are just creating the recipe_).
+
+4. We want age to be fit using a natural spline. Let's consider fitting a spline with 3 degrees of freedom. How many knots did will spline include? Where are the knots located by default?  What values of age for this dataset will the knots be set at by default?
+
+5. Instead of pre-specifying the degrees of freedom for our natural spline, let's allow this to be *tuned* using cross-validation. Update your recipe to include a step to fit age using a natural spline, but instead of setting the degrees of freedom, use `tune()` for this parameter. (_In this exercise, you are just updating the recipe_).
+
+6. Create a workflow for fitting the model. Add your recipe to this workflow. Add a model to this workflow (here we are doing linear regression).
+
+7. Use `tune_grid()` to fit the workflow specified in Exercise 6 using 10-fold cross validation, similar to Lab 04. Using the following grid:
+
+```{r}
+grid <- data.frame(deg_free = 1:10)
+```
+
+Use the `show_best` function to show the top 5 models using RMSE as the metric. Choose the model with the lowest RMSE. How many degrees of freedom were used for the age natural spline for this best model? Report the RMSE for this model as well as the chosen degrees of freedom.
+
+8. Create a "final workflow" using the best parameters from Exercise 7 (for this you will want to use the `finalize_workflow` function along with the `select_best` function to select the best parameters). Fit this finalized model. 
+
+9. Using the `explain_tidymodels` and `model_profile` functions from the `DALEXtra` package, along with the function `ggplot_pdp` to create a partial dependence plot to examine the effect of `age` on predicted wage in your final model. (To get the `ggplot_pdp` function to work, be sure to run the `source("ggplot_pdp.R")` line of code provided in your template file). Describe what you see.
+
+10. We are going to create a new recipe, swapping out the natural spline for age with a polynomial. Here we want age to be fit using a polynomial. Use `tune()` to decide how many degrees the polynomial should have for the `age` variable. Update the workflow from Exercise 6 with this new recipe using the `update_recipe` function.
+
+
+11. Use `tune_grid()` to fit the workflow from Exercise 10 using 10-fold cross validation. Using the following grid:
+
+```{r}
+grid <- data.frame(degree = 1:10)
+```
+
+Choose the model with the lowest RMSE. What degree polynomial was used for age for this best model? Report the RMSE for this model as well as the chosen degree.
+
+12. Create a "final workflow" using the best parameters from Exercise 11. Fit this finalized model.
+
+13. Create a publication-ready partial dependence plot to examine the effect of `age` on predicted wage in your final model from Exercise 12. Compare this to the plot created in Exercise 9.
+
+14. If the goal is prediction, which model would you prefer, the one fit in Exercise 8 or the one fit in Exercise 12? Explain your answer.
+
+15. Using your chosen model, examine whether ridge, lasso, or elastic net would provide a better fit. Use the following grid:
+
+```{r}
+grid <- expand_grid(
+  penalty = seq(0, 3, by = 0.5),
+  mixture = seq(0, 1, by = 0.1)
+)
+```
+
+To do this, we are going to have to create a *new* recipe and *new* workflow. In your recipe make sure that you use all the necessary steps (think about missing data, dummy variables, scaling, the transformation of age, etc). Describe your results.
+
