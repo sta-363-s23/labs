@@ -105,7 +105,14 @@ ggplot(---, aes(x = trees, y = mean)) +
 
 10. Based on the exercises above and the number of trees attempted, which method would you prefer? What seems to be the optimal number of trees?
 
-11. Update the model in your workflow to fit a penalized regression model using Elastic Net to estimate the car seat `Sales` using the remaining 10 variables. You may choose the penalty and mixture terms to try.
+11. Update the model in your workflow to fit a penalized regression model using Elastic Net to estimate the car seat `Sales` using the remaining 10 variables. Use the following grid:
+
+```{r}
+grid <- expand_grid(
+  penalty = seq(0, 0.1, by = 0.01),
+  mixture = c(0, 0.5, 1)
+)
+```
 
 12. Collect the metrics from the penalized regression and filter them to only include the root mean squared error. Using similar code as in Exercise 5, plot these results. Describe what you see.
 

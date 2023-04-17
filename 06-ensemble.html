@@ -2691,7 +2691,15 @@ vertical-align: -.125em;
 <li><p>Update the model in your workflow to fit a <strong>boosted tree</strong> estimating the car seat <code>Sales</code> using the remaining 10 variables. Specify the tree depth to be 1, the learn rate to 0.1, and <strong>tune</strong> the number of trees (<code>trees</code>), examining 10, 25, 50, 100, 200, and 300 trees.</p></li>
 <li><p>Collect the metrics from the boosted tree and filter them to only include the root mean squared error. Using similar code as in Exercise 5, plot these results. Describe what you see.</p></li>
 <li><p>Based on the exercises above and the number of trees attempted, which method would you prefer? What seems to be the optimal number of trees?</p></li>
-<li><p>Update the model in your workflow to fit a penalized regression model using Elastic Net to estimate the car seat <code>Sales</code> using the remaining 10 variables. You may choose the penalty and mixture terms to try.</p></li>
+<li><p>Update the model in your workflow to fit a penalized regression model using Elastic Net to estimate the car seat <code>Sales</code> using the remaining 10 variables. Use the following grid:</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="fu">expand_grid</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">penalty =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="at">by =</span> <span class="fl">0.01</span>),</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mixture =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="12" type="1">
 <li><p>Collect the metrics from the penalized regression and filter them to only include the root mean squared error. Using similar code as in Exercise 5, plot these results. Describe what you see.</p></li>
 <li><p>Let’s <em>stack</em> these models to create a single ensemble model. Using the <code>stacks()</code> function along with <code>add_candidates()</code>, <code>blend_predictions()</code> and <code>fit_members()</code>, put together a final model. Which models were retained in the ensemble model? Using <code>predict</code> examine how this final Ensemble model performs – what is the RMSE? How does this compare to the estimates of the test error for the individual models?</p></li>
 </ol>
