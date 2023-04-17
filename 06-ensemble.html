@@ -2641,7 +2641,7 @@ vertical-align: -.125em;
 </section>
 <section id="packages" class="level1">
 <h1>Packages</h1>
-<p>In this lab we will work with four packages: <code>ISLR</code> for the data, <code>visdat</code> to visualize the dataset, <code>tidyverse</code> which is a collection of packages for doing data analysis in a “tidy” way and <code>tidymodels</code> for statistical modeling.</p>
+<p>In this lab we will work with four packages: <code>ISLR</code> for the data, <code>visdat</code> to visualize the dataset, <code>tidyverse</code> which is a collection of packages for doing data analysis in a “tidy” way, <code>tidymodels</code> for statistical modeling, and <code>stacks</code> for stacking the models.</p>
 <p>If you’d like to run your code in the Console as well you’ll also need to load the packages there. To do so, run the following in the console.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) </span>
@@ -2693,7 +2693,7 @@ vertical-align: -.125em;
 <li><p>Based on the exercises above and the number of trees attempted, which method would you prefer? What seems to be the optimal number of trees?</p></li>
 <li><p>Update the model in your workflow to fit a penalized regression model using Elastic Net to estimate the car seat <code>Sales</code> using the remaining 10 variables. You may choose the penalty and mixture terms to try.</p></li>
 <li><p>Collect the metrics from the penalized regression and filter them to only include the root mean squared error. Using similar code as in Exercise 5, plot these results. Describe what you see.</p></li>
-<li><p>Let’s <em>stack</em> these models to create a single ensemble model. Using the <code>stacks()</code> function along with <code>add_candidates()</code>, <code>blend_predictions()</code> and <code>fit_members()</code>, put together a final model. Using <code>predict</code> examine how this final Ensemble model performs – what is the RMSE? How does this compare to the estimates of the test error for the individual models?</p></li>
+<li><p>Let’s <em>stack</em> these models to create a single ensemble model. Using the <code>stacks()</code> function along with <code>add_candidates()</code>, <code>blend_predictions()</code> and <code>fit_members()</code>, put together a final model. Which models were retained in the ensemble model? Using <code>predict</code> examine how this final Ensemble model performs – what is the RMSE? How does this compare to the estimates of the test error for the individual models?</p></li>
 </ol>
 </section>
 

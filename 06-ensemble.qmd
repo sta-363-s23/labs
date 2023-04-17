@@ -41,7 +41,7 @@ https://github.com/sta-363-s23/lab-06-ensemble.git
 
 # Packages
 
-In this lab we will work with four packages: `ISLR` for the data, `visdat` to visualize the dataset, `tidyverse` which is a collection of packages for doing data analysis in a "tidy" way and `tidymodels` for statistical modeling.
+In this lab we will work with four packages: `ISLR` for the data, `visdat` to visualize the dataset, `tidyverse` which is a collection of packages for doing data analysis in a "tidy" way, `tidymodels` for statistical modeling, and `stacks` for stacking the models.
 
 If you'd like to run your code in the Console as well you'll also need to load the packages there. To do so, run the following in the console. 
 
@@ -109,4 +109,4 @@ ggplot(---, aes(x = trees, y = mean)) +
 
 12. Collect the metrics from the penalized regression and filter them to only include the root mean squared error. Using similar code as in Exercise 5, plot these results. Describe what you see.
 
-13. Let's *stack* these models to create a single ensemble model. Using the `stacks()` function along with `add_candidates()`, `blend_predictions()` and `fit_members()`, put together a final model. Using `predict` examine how this final Ensemble model performs -- what is the RMSE? How does this compare to the estimates of the test error for the individual models?
+13. Let's *stack* these models to create a single ensemble model. Using the `stacks()` function along with `add_candidates()`, `blend_predictions()` and `fit_members()`, put together a final model. Which models were retained in the ensemble model? Using `predict` examine how this final Ensemble model performs -- what is the RMSE? How does this compare to the estimates of the test error for the individual models?
