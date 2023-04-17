@@ -55,10 +55,11 @@ library(stacks)
 
 Note that the packages are also loaded with the same commands in your Quarto document. 
 
-If you are working in your local RStudio, you may need to install the package to perform boosting. You can do this by running the following **once** in the console:
+You may need to install the package to perform boosting. You can do this by running the following **once** in the console:
 
 ```{r, eval = FALSE}
 install.packages("xgboost")
+install.packages("stacks")
 ```
 
 # Data
