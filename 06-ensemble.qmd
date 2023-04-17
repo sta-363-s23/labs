@@ -50,6 +50,7 @@ library(tidyverse)
 library(tidymodels)
 library(ISLR)
 library(visdat)
+library(stacks)
 ```
 
 Note that the packages are also loaded with the same commands in your Quarto document. 
